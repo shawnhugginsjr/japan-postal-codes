@@ -1,4 +1,18 @@
 extends layout
 
 block content
-  h1  #{postalCode.division_one}, #{postalCode.municipality}, #{postalCode.prefecture}
+  if error
+    h1= error
+  else
+    h1  #{mainPostalCode.prefecture}, #{mainPostalCode.division_one}, #{mainPostalCode.municipality}
+    if weatherData
+      each item in weatherData
+        p= JSON.stringify(item)
+    else
+      p Weather could not be loaded
+    
+    if nearPostalCodes
+      each postalCode in nearPostalCodes
+        p= JSON.stringify(postalCode)
+    else
+      p Near postal Codes could not be found
