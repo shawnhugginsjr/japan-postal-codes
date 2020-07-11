@@ -16,3 +16,27 @@ block content
         p= JSON.stringify(postalCode)
     else
       p Near postal Codes could not be found
+    
+    #map
+
+block map_sources
+  if location
+    script(src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js")
+    link(rel="stylesheet", href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css")
+
+
+block map_setup
+  if location
+    script.
+      mapboxgl.accessToken = 'pk.eyJ1IjoibXVyYXNha2kyOSIsImEiOiJja2NocGd4eGIxNDJhMnJwYm8yNWZqNG95In0.8fAAeOrcQlBiwz_cpGfGyg';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: ["#{location.lon}", "#{location.lat}"],
+        zoom: 8
+      });
+
+      var marker = new mapboxgl.Marker()
+        .setLngLat(["#{location.lon}","#{location.lat}"])
+        .addTo(map);
+

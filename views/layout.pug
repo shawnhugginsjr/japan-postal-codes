@@ -3,9 +3,13 @@ html
   head
     title= title
     link(rel="stylesheet", href="/stylesheets/style.css")
+    block map_sources
+
   body
     - postalCodeString = (searchedPostalCode ? searchedPostalCode : "")
     form(action="/" method="get")
       input(type="text" id="postal_code" name="postal_code" required value=postalCodeString)
       input(type="submit" value="submit")
     block content
+
+    block map_setup
