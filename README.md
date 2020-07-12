@@ -3,13 +3,11 @@
 ## Project Requirements
 - latest npm
 ## Start Instructions
-
-
 Inside the `postal_code` folder run 
 ```
 npm install
 ``` 
-to download all project depedencies.
+to download all project dependencies.
 
 Then run 
 ```
