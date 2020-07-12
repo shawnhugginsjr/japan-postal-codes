@@ -54,12 +54,6 @@ router.get('/', async (req, res, next) => {
         return
       }
 
-      // for (let i = 0; i < weatherData.length; i++) {
-      //   weatherData
-      // }
-
-
-
       res.render('postal_code', {
         weatherData: weatherData,
         nearPostalCodes: nearPostalCodes,
@@ -75,16 +69,5 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 });
-
-function formatUnixDate(unixTimestamp) {
-  d = new Date(unixTimestamp*1000);
-  days =['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  mm = this.getMonth() + 1; // getMonth() is zero-based
-  dd = this.getDate();
-
-
-  return [this.getFullYear(), (mm>9 ? '' : '0') + mm,(dd>9 ? '' : '0') + dd
-         ].join('-') + ' ' + days[d.getDay()]
-}
 
 module.exports = router;

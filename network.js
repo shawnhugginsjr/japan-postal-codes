@@ -4,7 +4,6 @@ network = {
     fetchPostcodeData: (postalCode) => {
         noHyphenPostalCode = postalCode.split('-').join('')
         url = 'https://apis.postcode-jp.com/api/v3/postcodes/' + noHyphenPostalCode
-        console.log(url)
         return axios.get(url, {
             headers: {
                 "apikey": "GVgQlNR36mSJGxUwe96756DEb2VXRZ0Sncd4ZD3"
