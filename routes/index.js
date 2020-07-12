@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
     if (postalCodeString.length !== postalCodeLength || postalCodeString.search(postalCodeRegex) === -1) {
       res.render('postal_code', {
         searchedPostalCode: postalCodeString,
-        error: `'${postalCodeString}' is an invalid Postal Code.}`
+        error: `Postal Code '${postalCodeString}' is invalid.`
       })
       return
     }

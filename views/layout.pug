@@ -10,7 +10,7 @@ html
     .container
       form(action="/" method="get")
         label(for="postal_code").postal-label Postal Code
-        input(type="text" id="postal_code" name="postal_code" required value=postalCodeString).postal-text-box
+        input(type="text" id="postal_code" name="postal_code" placeholder="160-0022" required value=postalCodeString).postal-text-box
         input(type="submit" value="submit").postal-submit
     block content
 
