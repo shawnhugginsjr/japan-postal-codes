@@ -23,8 +23,9 @@ router.get('/', async (req, res, next) => {
       return
     }
 
-    // apis.postcode-jp.com is used to find the latitude and longitude of coordiantes
+    // apis.postcode-jp.com is used to find the latitude and longitude coordiantes
     // as my coordinate source for the postal codes are inconsistent in quality.
+    // A newer source should be found.
     postCodeData = await network.fetchPostcodeData(postalCodeString)
     if (postCodeData.status === 204) {
       res.render('postal_code', {
