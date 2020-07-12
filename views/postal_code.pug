@@ -15,7 +15,7 @@ block content
           ].join('-') + ' ' + days[d.getDay()]
         }
     .container
-      h1  #{mainPostalCode.prefecture}, #{mainPostalCode.division_one}, #{mainPostalCode.municipality}
+      h1.postal-address  #{mainPostalCode.prefecture}, #{mainPostalCode.division_one}, #{mainPostalCode.municipality}
     if weatherData
       .container
         #forecast-header 3 Day Forecast
@@ -42,14 +42,14 @@ block content
         #map
 
       #nearPostalCodes-container
-        .postal-codes-header Near Postal Codes
+        .postal-codes-header Close Postal Codes
         if nearPostalCodes
           .postal-codes
             each postalCode in nearPostalCodes
-              .postal-code
+              .postal-code(onclick=`location.href='./?postal_code=${postalCode.postal_code}'`)
                 = `${postalCode.postal_code} - ${postalCode.division_one}`
         else
-          p Near Postal Codes could not be found
+          p Close Postal Codes could not be found
       
 
 block map_sources

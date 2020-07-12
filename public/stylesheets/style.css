@@ -7,6 +7,9 @@ a {
   color: #00B7FF;
 }
 
+.postal-address {
+  max-width: 600px;
+}
 .container {
   display: block;
   max-width: 960px;
@@ -38,13 +41,21 @@ a {
   padding: 1em 0;
 }
 
-.postal-codes {
-  display: block;
-}
-
 .postal-code {
+  cursor: pointer;
   display: block;
   text-align: center;
+  height: 2.3em;
+  overflow: hidden;
+  background-color: #80808052;
+  padding: 0.7em 1em;
+  margin-bottom: 0.2em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.postal-code:hover {
+  background-color: #8080801a;
 }
 
 #map-container {
