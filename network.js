@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 network = {
-    fetchPostcodeData: (postalCode) => {
+    fetchPostalCodeData: (postalCode) => {
         noHyphenPostalCode = postalCode.split('-').join('')
         url = 'https://apis.postcode-jp.com/api/v3/postcodes/' + noHyphenPostalCode
         return axios.get(url, {
