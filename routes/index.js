@@ -4,7 +4,7 @@ var network = require('../network')
 
 postalCodeRegex = /\d\d\d-\d\d\d\d/
 postalCodeLength = 8
-sqlNearPostalCodes = "SELECT child.* FROM postal_codes as child, (SELECT id FROM postal_codes WHERE postal_code = ?) as parent WHERE child.id BETWEEN parent.id-2 AND parent.id+2;"
+sqlNearPostalCodes = "SELECT near_codes.* FROM postal_codes as near_codes, (SELECT id FROM postal_codes WHERE postal_code = ?) as main_code WHERE near_codes.id BETWEEN main_code.id-2 AND main_code.id+2;"
 
 
 router.get('/', async (req, res, next) => {
