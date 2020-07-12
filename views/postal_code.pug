@@ -1,23 +1,49 @@
 extends layout
 
+
 block content
   if error
     h1= error
   else
+    -
+      function formatUnixDate(unixTimestamp) {
+        d = new Date(unixTimestamp*1000);
+        days =['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        mm = d.getMonth() + 1; // getMonth() is zero-based
+        dd = d.getDate();
+        return [d.getFullYear(), (mm>9 ? '' : '0') + mm,(dd>9 ? '' : '0') + dd
+          ].join('-') + ' ' + days[d.getDay()]
+        }
     h1  #{mainPostalCode.prefecture}, #{mainPostalCode.division_one}, #{mainPostalCode.municipality}
     if weatherData
-      each item in weatherData
-        p= JSON.stringify(item)
+      #forecast-header Three Day Forecast
+      #3day-forecast
+        each item in weatherData
+          .forecast
+            .weather-image
+              - url = `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+              img(src=url, alt="weather image")
+            .date
+              = formatUnixDate(item.dt)
+            .weather-type
+              = item.weather[0].main
+            .max-min-temp
+              = `Max: ${item.temp.max}° Min: ${item.temp.min}°`
     else
       p Weather could not be loaded
     
-    if nearPostalCodes
-      each postalCode in nearPostalCodes
-        p= JSON.stringify(postalCode)
-    else
-      p Near postal Codes could not be found
-    
-    #map
+    .container
+      #map-container
+        #map
+
+      #nearPostalCodes-container
+        if nearPostalCodes
+          each postalCode in nearPostalCodes
+            .postal-code
+              = `${postalCode.postal_code} - ${postalCode.division_one}`
+        else
+          p Near Postal Codes could not be found
+      
 
 block map_sources
   if location

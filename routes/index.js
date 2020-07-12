@@ -40,11 +40,25 @@ router.get('/', async (req, res, next) => {
     Promise.allSettled([weatherPromise, nearPostalCodesPromise]).then((values) => {
       weatherData = (values[0].status === "fulfilled" ? values[0].value.data.daily.slice(0, 3) : null)
       nearPostalCodes = (values[1].status === "fulfilled" ? values[1].value : null)
+      mainPostalCode = null
       if (nearPostalCodes) {
         mainPostalCode = nearPostalCodes.find(code => code.postal_code === postalCodeString)
       } else {
-        // LOAD mainPostalCode from PostCodeData
+        // TODO: Load mainPostalCode from PostCodeData if the postal code does not exist
+        // in the sql database.
+        res.render('postal_code', {
+          searchedPostalCode: postalCodeString,
+          error: `Postal Code '${postalCodeString}' could not be found.`
+        })
+        return
       }
+
+      // for (let i = 0; i < weatherData.length; i++) {
+      //   weatherData
+      // }
+
+
+
       res.render('postal_code', {
         weatherData: weatherData,
         nearPostalCodes: nearPostalCodes,
@@ -60,5 +74,16 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 });
+
+function formatUnixDate(unixTimestamp) {
+  d = new Date(unixTimestamp*1000);
+  days =['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  mm = this.getMonth() + 1; // getMonth() is zero-based
+  dd = this.getDate();
+
+
+  return [this.getFullYear(), (mm>9 ? '' : '0') + mm,(dd>9 ? '' : '0') + dd
+         ].join('-') + ' ' + days[d.getDay()]
+}
 
 module.exports = router;

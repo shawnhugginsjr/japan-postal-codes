@@ -10,3 +10,9 @@ a {
 #map {
   height: 200px;
 }
+
+.forecast {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+}
