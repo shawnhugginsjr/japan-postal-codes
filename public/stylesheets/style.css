@@ -7,12 +7,81 @@ a {
   color: #00B7FF;
 }
 
+.container {
+  display: block;
+  max-width: 960px;
+  min-width: 400px;
+  padding-left: 20%;
+  margin: 0 auto;
+}
+
+#nearPostalCodes-container {
+  width: 33%;
+  height: 315px;
+  float: left;
+}
+
+.postal-codes-header {
+  padding: 1em 0;
+}
+
+.postal-codes {
+  display: block;
+}
+
+.postal-code {
+  display: block;
+  text-align: center;
+}
+
+#map-container {
+  width: 33%;
+  padding-right: 2%;
+  height: 315px;
+  float: left;
+}
+
 #map {
-  height: 200px;
+  height: 310px;
+}
+
+.map-header {
+  padding: 1em 0.3em;
+}
+
+#three-day-forecast {
+  margin-left: -6.3%;
 }
 
 .forecast {
   display: inline-block;
   width: 25%;
   text-align: center;
+}
+
+.weather-image {
+  display: block;
+}
+
+.date {
+  display: block;
+}
+
+.weather-type {
+  display: block;
+  font-size: 2em;
+  padding: 0.25em 0;
+}
+
+.max-min-temp {
+  display: block;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }

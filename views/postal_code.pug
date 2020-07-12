@@ -14,33 +14,40 @@ block content
         return [d.getFullYear(), (mm>9 ? '' : '0') + mm,(dd>9 ? '' : '0') + dd
           ].join('-') + ' ' + days[d.getDay()]
         }
-    h1  #{mainPostalCode.prefecture}, #{mainPostalCode.division_one}, #{mainPostalCode.municipality}
-    if weatherData
-      #forecast-header Three Day Forecast
-      #3day-forecast
-        each item in weatherData
-          .forecast
-            .weather-image
-              - url = `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
-              img(src=url, alt="weather image")
-            .date
-              = formatUnixDate(item.dt)
-            .weather-type
-              = item.weather[0].main
-            .max-min-temp
-              = `Max: ${item.temp.max}° Min: ${item.temp.min}°`
-    else
-      p Weather could not be loaded
-    
     .container
+      h1  #{mainPostalCode.prefecture}, #{mainPostalCode.division_one}, #{mainPostalCode.municipality}
+    if weatherData
+      .container
+        #forecast-header 3 Day Forecast
+      .container 
+        #three-day-forecast
+          each item in weatherData
+            .forecast
+              .weather-image
+                - url = `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+                img(src=url, alt="weather image")
+              .date
+                = formatUnixDate(item.dt)
+              .weather-type
+                = item.weather[0].main
+              .max-min-temp
+                = `Max: ${Math.round(item.temp.max)}° Min: ${Math.round(item.temp.min)}°`
+    else
+      .container
+        p Weather could not be loaded
+    
+    .container.clearfix
       #map-container
+        .map-header Map
         #map
 
       #nearPostalCodes-container
+        .postal-codes-header Near Postal Codes
         if nearPostalCodes
-          each postalCode in nearPostalCodes
-            .postal-code
-              = `${postalCode.postal_code} - ${postalCode.division_one}`
+          .postal-codes
+            each postalCode in nearPostalCodes
+              .postal-code
+                = `${postalCode.postal_code} - ${postalCode.division_one}`
         else
           p Near Postal Codes could not be found
       
